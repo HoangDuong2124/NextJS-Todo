@@ -21,6 +21,9 @@ body {
   background: white;
 }
 input{
+  width: 80%;
+  height:28px;
+  padding-left:10px;
   border:1px rgb(81, 78, 78) solid ;
   border-radius: 9999px;
 }

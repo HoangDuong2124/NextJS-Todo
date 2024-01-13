@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect, Children, useMemo } from 'react'
 import ToDoItem from './ToDoItem'
-import CrudTodo from './CrudTodo'
-
+import AddTodo from './AddTodo'
 export interface IToDo {
     id: string
     idTask: string
     status: string
     name: string
-    dueDate?: Date
+    dueDate: string
     isCheck?: boolean
+    isUpdate?: boolean
 }
 
 export interface Status {
@@ -25,11 +25,12 @@ interface ITaskGroup {
     children: IToDo[]
 }
 
-export interface NewTask {
+export interface NewTodo {
     id: string
     idTask: string
     status: string
     name: string
+    dueDate:string
     isCreate: boolean
 }
 
@@ -41,15 +42,13 @@ export interface NewStatus {
 export interface UpdateTodo {
     id: string
     name: string
+    dueDate: string
+    status: string
     isUpdate: boolean
 }
-const randomId = () => {
+   const randomId = () => {
     return Math.random().toString(36).slice(2)
 }
-const randomName = () => {
-    return Math.random().toString(36).slice(2)
-}
-
 const globalInitStatus = [
     {
         id: "1",
@@ -64,25 +63,28 @@ const globalInitTodo = [
     {
         id: "1",
         idTask: "1",
+        dueDate: "Tomorrow",
         status: "In Progress",
         name: "Học Nextjs với F8",
-
     },
     {
         id: "etr",
         idTask: "2",
+        dueDate: "Next Week",
         status: "In Progress",
         name: "Học reactjs với F8",
     },
     {
         id: "222",
         idTask: "2",
+        dueDate: "Tomorrow",
         status: "In Progress",
         name: "Học php với F8",
     },
     {
         id: "e444",
         idTask: "1",
+        dueDate: "Next Month",
         status: "Complete",
         name: "Học nodejs với F8",
     }
@@ -94,6 +96,7 @@ const TestPage = () => {
         {
             id: "1",
             idTask: "1",
+            dueDate: "Tomorrow",
             status: "In Progress",
             name: "Học Nextjs với F8",
 
@@ -101,18 +104,21 @@ const TestPage = () => {
         {
             id: "etr",
             idTask: "2",
+            dueDate: "Next Week",
             status: "In Progress",
             name: "Học reactjs với F8",
         },
         {
             id: "222",
             idTask: "2",
+            dueDate: "Tomorrow",
             status: "In Progress",
             name: "Học php với F8",
         },
         {
             id: "e444",
             idTask: "1",
+            dueDate: "Next Month",
             status: "Complete",
             name: "Học nodejs với F8",
         }
@@ -131,8 +137,9 @@ const TestPage = () => {
     const init = {
         id: randomId(),
         idTask: "",
-        status: "Pending",
         name: "",
+        dueDate:"",
+        status: "",
         isCreate: false,
     }
 
@@ -142,12 +149,11 @@ const TestPage = () => {
         isCreate: false,
     }
 
-    const [newTask, setNewTask] = useState<NewTask>(init)
+    const [newTodo, setNewTodo] = useState<NewTodo>(init)
 
     const [newStatus, setNewStatus] = useState<NewStatus>(initStatus)
 
-    const [updateTodos, setUpdateTodos] = useState<UpdateTodo>({ id: "", name: "", isUpdate: false })
-
+    const [updateTodos, setUpdateTodos] = useState<UpdateTodo>({ id: "", name: "", status: "", dueDate: "", isUpdate: false })
     useEffect(() => {
         const localTodo = localStorage.getItem('localTodo')
         setTodo(localTodo ? JSON.parse(localTodo) : globalInitTodo)
@@ -197,7 +203,7 @@ const TestPage = () => {
                         <div className='flex'>
                             <h3 className='font-bold text-lg mr-2'>{groupItem.name}</h3>
                             <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
-                                onClick={() => setNewTask((prev) => {
+                                onClick={() => setNewTodo((prev) => {
                                     return {
                                         ...prev,
                                         idTask: groupItem.id,
@@ -217,8 +223,8 @@ const TestPage = () => {
                                 <ToDoItem todo={item} key={item.id}
                                     setTodo={setTodo}
                                     setUpdateTodos={setUpdateTodos}
-                                    updateData={{ id: item.id, name: item.name, isCheck: item.isCheck }}
                                 />
+
                             ))}
                         </React.Fragment>
                     </div>
@@ -226,34 +232,26 @@ const TestPage = () => {
 
             </div>
             <div>
-                <button onClick={() => setNewStatus((prev) => {
+                {/* <button className='rounded-full bg-red-500 text-white w-auto p-1 font-bold ' onClick={() => setNewStatus((prev) => {
 
 
                     return {
                         ...prev,
                         isCreate: true
                     }
-                })}>Add Status</button>
-
-
-                <button className='ml-5' onClick={() => setNewTask((prev) => {
-
-
-                    return {
-                        ...prev,
-                        isCreate: true
-                    }
-                })}>Add Todo</button>
+                })}>Add Status</button> */}
+                <button className='ml-5 rounded-full bg-red-500 text-white w-auto p-1 font-bold'
+                    onClick={() => setNewTodo((prev) => {
+                        return {
+                            ...prev,
+                            isCreate: true
+                        }
+                    })}>Add Task</button>
             </div>
-            <CrudTodo newTask={newTask}
-                newStatus={newStatus}
-                updateTodo={updateTodos}
+            <AddTodo
                 setTodo={setTodo}
-                setStatus={setStatus}
-                setNewStatus={setNewStatus}
-                setNewTask={setNewTask}
-                setUpdateTodo={setUpdateTodos}
-                setUpdateTodos={setUpdateTodos}
+                newTodo={newTodo}   
+                setNewTodo={setNewTodo}
             />
         </div>
 
