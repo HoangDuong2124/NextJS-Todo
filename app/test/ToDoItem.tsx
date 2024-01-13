@@ -41,7 +41,7 @@ const ToDoItem = ({ todo, setTodo, setUpdateTodos }: IProps) => {
     }
     return (
         <>
-           {!todo.isUpdate===true && <div className='w-full  grid grid-cols-5 border-b-2 '>
+           {!todo.isUpdate===true && <div className='w-full  grid grid-cols-5 border-b-2 tracking-normal '>
                 <div className=' flex p-3 col-span-2'>
                     <button className={`${todo.isCheck === true ? ' h-7 w-7 mr-6 flex justify-center items-center  rounded-full border-2 border-slate-400  bg-slate-400' : 'group h-7 w-7 mr-6 flex justify-center items-center  rounded-full border-2 border-slate-400  bg-white hover:bg-slate-400'}`}
                         onClick={updateStatusTodo}

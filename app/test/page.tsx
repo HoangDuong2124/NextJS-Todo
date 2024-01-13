@@ -64,28 +64,28 @@ const globalInitTodo = [
     {
         id: "1",
         idTask: "1",
-        dueDate: "Tomorrow",
+        dueDate: "2024-01-25",
         status: "In Progress",
         name: "Học Nextjs với F8",
     },
     {
         id: "etr",
         idTask: "2",
-        dueDate: "Next Week",
+        dueDate: "2024-01-25",
         status: "In Progress",
         name: "Học reactjs với F8",
     },
     {
         id: "222",
         idTask: "2",
-        dueDate: "Tomorrow",
+        dueDate: "2024-01-25",
         status: "In Progress",
         name: "Học php với F8",
     },
     {
         id: "e444",
         idTask: "1",
-        dueDate: "Next Month",
+        dueDate: "2024-01-25",
         status: "Complete",
         name: "Học nodejs với F8",
     }
@@ -97,29 +97,28 @@ const TestPage = () => {
         {
             id: "1",
             idTask: "1",
-            dueDate: "Tomorrow",
+            dueDate: "2024-01-25",
             status: "In Progress",
             name: "Học Nextjs với F8",
-
         },
         {
             id: "etr",
             idTask: "2",
-            dueDate: "Next Week",
+            dueDate: "2024-01-25",
             status: "In Progress",
             name: "Học reactjs với F8",
         },
         {
             id: "222",
             idTask: "2",
-            dueDate: "Tomorrow",
+            dueDate: "2024-01-25",
             status: "In Progress",
             name: "Học php với F8",
         },
         {
             id: "e444",
             idTask: "1",
-            dueDate: "Next Month",
+            dueDate: "2024-01-25",
             status: "Complete",
             name: "Học nodejs với F8",
         }
