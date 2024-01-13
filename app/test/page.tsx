@@ -31,6 +31,7 @@ export interface NewTodo {
     status: string
     name: string
     dueDate:string
+    type:string
     isCreate: boolean
 }
 
@@ -140,6 +141,7 @@ const TestPage = () => {
         name: "",
         dueDate:"",
         status: "",
+        type:"",
         isCreate: false,
     }
 
@@ -207,6 +209,7 @@ const TestPage = () => {
                                     return {
                                         ...prev,
                                         idTask: groupItem.id,
+                                        type:"2",
                                         isCreate: true
                                     }
                                 })}>
@@ -244,6 +247,7 @@ const TestPage = () => {
                     onClick={() => setNewTodo((prev) => {
                         return {
                             ...prev,
+                            type:"1",
                             isCreate: true
                         }
                     })}>Add Task</button>

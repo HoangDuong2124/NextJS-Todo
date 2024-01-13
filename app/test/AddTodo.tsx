@@ -15,6 +15,7 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
         name: "",
         dueDate:"",
         status: "",
+        type:"",
         isCreate: false,
     }
     const addNewTodo = () => {
@@ -30,7 +31,7 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
 
     return (
         <>
-            {newTodo.isCreate && <div className='w-full  grid grid-cols-6 border-b-2 '>
+            {newTodo.isCreate &&newTodo.type==="1" && <div className='w-full  grid grid-cols-6 border-b-2 '>
                 <div className=' flex p-3 col-span-2'>
                     <input type="text" placeholder='Nhập name task'
                         onChange={e => setNewTodo(prev => {
@@ -47,6 +48,46 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
                             return {
                                 ...prev,
                                 idTask: e.target.value
+                            }
+                        })}
+                    />
+                </div>
+                <div className='flex items-center justify-center '>
+                    <input type="text" placeholder='Nhập Date dedline'
+                        onChange={e => setNewTodo(prev => {
+                            return {
+                                ...prev,
+                                dueDate: e.target.value
+                            }
+                        })}
+                    />
+                </div>
+                <div className=' flex justify-center items-center  '>
+                    <input type="text" placeholder='Nhập status'
+                        onChange={e => setNewTodo(prev => {
+                            return {
+                                ...prev,
+                                status: e.target.value
+                            }
+                        })}
+                    />
+                </div>
+
+                <div className='text-center p-3 '>
+                    <button className='w-20 h-7  bg-blue-500 hover:bg-blue-700 text-white font-bold  px-2 rounded-full'
+                        onClick={addNewTodo}
+                    >
+                        Add
+                    </button>
+                </div>
+            </div>}
+            {newTodo.isCreate &&newTodo.type==="2" && <div className='w-full  grid grid-cols-6 border-b-2 '>
+                <div className=' flex p-3 col-span-2'>
+                    <input type="text" placeholder='Nhập name task'
+                        onChange={e => setNewTodo(prev => {
+                            return {
+                                ...prev,
+                                name: e.target.value
                             }
                         })}
                     />
