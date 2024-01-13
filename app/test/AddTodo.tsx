@@ -53,7 +53,7 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
                     />
                 </div>
                 <div className='flex items-center justify-center '>
-                    <input type="text" placeholder='Nhập Date dedline'
+                    <input type="date" placeholder='Nhập Date dedline'
                         onChange={e => setNewTodo(prev => {
                             return {
                                 ...prev,
@@ -93,7 +93,7 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
                     />
                 </div>
                 <div className='flex items-center justify-center '>
-                    <input type="text" placeholder='Nhập Date dedline'
+                    <input type="date" placeholder='Nhập Date dedline'
                         onChange={e => setNewTodo(prev => {
                             return {
                                 ...prev,
