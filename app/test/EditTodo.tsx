@@ -31,7 +31,7 @@ const EditTodo = ({ todo, setTodo }: IEditTodo) => {
                     placeholder='Nhập name task' />
             </div>
             <div className='flex items-center justify-center '>
-                <input onChange={e => setUpdate((prev) => {
+                <input type='date' onChange={e => setUpdate((prev) => {
                     return {
                         ...prev,
                         dueDate: e.target.value
