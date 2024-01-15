@@ -63,14 +63,20 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
                     />
                 </div>
                 <div className=' flex justify-center items-center  '>
-                    <input type="text" placeholder='Nhập status'
-                        onChange={e => setNewTodo(prev => {
-                            return {
-                                ...prev,
-                                status: e.target.value
-                            }
-                        })}
-                    />
+                     <select name="status" id="status" 
+                  onChange={e=>{
+                     setNewTodo((prev)=>{
+                        return {
+                            ...prev,
+                            status:e.target.value
+                        }
+                     })
+                  }}
+                 >
+                  <option value="In Progress" >In Progress</option>
+                  <option value="Pending" >Pending</option>
+                  <option value="Complete" >Complete</option>
+               </select>
                 </div>
 
                 <div className='text-center p-3 '>
@@ -103,14 +109,20 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
                     />
                 </div>
                 <div className=' flex justify-center items-center  '>
-                    <input type="text" placeholder='Nhập status'
-                        onChange={e => setNewTodo(prev => {
-                            return {
-                                ...prev,
-                                status: e.target.value
-                            }
-                        })}
-                    />
+                <select name="status" id="status" 
+                  onChange={e=>{
+                     setNewTodo((prev)=>{
+                        return {
+                            ...prev,
+                            status:e.target.value
+                        }
+                     })
+                  }}
+                 >
+                  <option value="In Progress" >In Progress</option>
+                  <option value="Pending" >Pending</option>
+                  <option value="Complete">Complete</option>
+               </select>
                 </div>
 
                 <div className='text-center p-3 '>

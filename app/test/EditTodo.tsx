@@ -41,14 +41,29 @@ const EditTodo = ({ todo, setTodo }: IEditTodo) => {
                   placeholder='Nhập Date dedline' />
             </div>
             <div className=' flex justify-center items-center  '>
-                <input onChange={e => setUpdate((prev) => {
+               <select name="status" id="status" 
+                  onChange={e=>{
+                     setUpdate((prev)=>{
+                        return {
+                            ...prev,
+                            status:e.target.value
+                        }
+                     })
+                  }}
+                 >
+                  <option value="In Progress" selected={todo.status==="In Progress"}>In Progress</option>
+                  <option value="Pending" selected={todo.status==="Pending"}>Pending</option>
+                  <option value="Complete" selected={todo.status==="Complete"}>Complete</option>
+               </select>
+
+                {/* <input onChange={e => setUpdate((prev) => {
                     return {
                         ...prev,
                         status: e.target.value
                     }
                 })} 
                 value={update.status}
-                placeholder='Nhập status' />
+                placeholder='Nhập status' /> */}
             </div>
             <div className='text-center p-3 '>
                 <button className='w-20 h-7  bg-blue-500 hover:bg-blue-700 text-white font-bold  px-2 rounded-full'

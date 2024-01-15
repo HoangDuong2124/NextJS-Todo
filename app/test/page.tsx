@@ -184,7 +184,7 @@ const TestPage = () => {
             else{
                 prev.push(
                     {
-                        id:next!.idTask,
+                        id:"3",
                         children:[next] 
                     }
                 )

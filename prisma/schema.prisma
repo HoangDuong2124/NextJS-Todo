@@ -10,8 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Todo {
   id String @default(cuid()) @id
+  isStatus String
   name String?
-  email String @unique
+  status String 
+  dueDate String
+  isCheck boolean?
+  isUpdate boolean? 
 }
