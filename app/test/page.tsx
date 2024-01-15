@@ -21,7 +21,7 @@ export interface Status {
 
 interface ITaskGroup {
     id: string;
-    name: string
+    name?: string
     children: IToDo[]
 }
 
@@ -119,7 +119,7 @@ const TestPage = () => {
             id: "e444",
             idTask: "1",
             dueDate: "2024-01-25",
-            status: "Complete",
+            status: "Complete", 
             name: "Học nodejs với F8",
         }
     ])
@@ -181,6 +181,14 @@ const TestPage = () => {
                     children: [next]
                 })
             }
+            else{
+                prev.push(
+                    {
+                        id:next!.idTask,
+                        children:[next] 
+                    }
+                )
+            }
 
 
         }
@@ -201,9 +209,9 @@ const TestPage = () => {
             <div>
                 {group.map((groupItem) => (
                     <div key={groupItem.id} className="">
-                        <div className='flex'>
+                        <div className='flex '>
                             <h3 className='font-bold text-lg mr-2'>{groupItem.name}</h3>
-                            <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
+                          {groupItem.id==="1" &&   <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
                                 onClick={() => setNewTodo((prev) => {
                                     return {
                                         ...prev,
@@ -216,7 +224,21 @@ const TestPage = () => {
                                     <path className=' fill-stone-500' d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
                                     />
                                 </svg>
-                            </button>
+                            </button>}
+                            {groupItem.id==="2" &&   <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
+                                onClick={() => setNewTodo((prev) => {
+                                    return {
+                                        ...prev,
+                                        idTask: groupItem.id,
+                                        type:"2",
+                                        isCreate: true
+                                    }
+                                })}>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                    <path className=' fill-stone-500' d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                                    />
+                                </svg>
+                            </button>}
                         </div>
 
 
