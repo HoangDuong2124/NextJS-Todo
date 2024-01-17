@@ -11,11 +11,16 @@ datasource db {
 }
 
 model Todo {
-  id String @default(cuid()) @id
-  isStatus String
-  name String?
-  status String 
-  dueDate String
-  isCheck boolean?
-  isUpdate boolean? 
+  id       Int      @id @default(autoincrement())
+  idTask   String
+  name     String?
+  status   String
+  dueDate  String
+  isCheck  Boolean?
+  isUpdate Boolean?
+}
+
+model Status {
+  id   Int     @id @default(autoincrement())
+  name String?
 }

@@ -22,11 +22,6 @@ const ToDoItem = ({ todo, setTodo, setUpdateTodos }: IProps) => {
                 return items
             }
             )
-            // console.log(find)
-            // const find2 = prev.find((it) => it.id === item.id)
-            // console.log("find2: ", find2)
-            const jsonTodos = JSON.stringify(find)
-            localStorage.setItem('localTodo', jsonTodos)
             return find
         })
     }

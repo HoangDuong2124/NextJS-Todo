@@ -6,16 +6,28 @@ interface IEditTodo {
     setTodo: React.Dispatch<React.SetStateAction<IToDo[]>>
 }
 const EditTodo = ({ todo, setTodo }: IEditTodo) => {
+
+    const fetchUpdate = async (data:UpdateTodo)=>{
+         console.log("Em tên là:",JSON.stringify(data))
+        const res = await fetch(`/api/todo/${update.id}`,{
+            method: "PUT",
+            headers:{
+                'Content-Type':'application/json',
+                'API-Key':process.env.DATA_API_KEY!, 
+            },
+            body: JSON.stringify(data),
+        }) 
+    }
+
     const [update, setUpdate] = useState<UpdateTodo>({ id:todo.id, name:todo.name, status:todo.status, dueDate:todo.dueDate, isUpdate: false })
     const saveUpdate = () => {
         setTodo(prev => {
             const save = prev.map((item) =>
                 item.id === todo.id ? { ...item, name: update.name, status: update.status, dueDate: update.dueDate, isUpdate: false } : item
-            )
-            const jsonTodos = JSON.stringify(save)
-           localStorage.setItem('localTodo', jsonTodos)
+            )   
             return save
         })
+        fetchUpdate(update)
     }
     return (
         <>
@@ -55,15 +67,6 @@ const EditTodo = ({ todo, setTodo }: IEditTodo) => {
                   <option value="Pending" selected={todo.status==="Pending"}>Pending</option>
                   <option value="Complete" selected={todo.status==="Complete"}>Complete</option>
                </select>
-
-                {/* <input onChange={e => setUpdate((prev) => {
-                    return {
-                        ...prev,
-                        status: e.target.value
-                    }
-                })} 
-                value={update.status}
-                placeholder='Nhập status' /> */}
             </div>
             <div className='text-center p-3 '>
                 <button className='w-20 h-7  bg-blue-500 hover:bg-blue-700 text-white font-bold  px-2 rounded-full'

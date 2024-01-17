@@ -21,8 +21,6 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
     const addNewTodo = () => {
         setTodo(prev => {
             const add = [...prev, newTodo]
-            const jsonTodos = JSON.stringify(add)
-            localStorage.setItem('localTodo', jsonTodos)
             return add
 
         })

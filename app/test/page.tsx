@@ -30,8 +30,8 @@ export interface NewTodo {
     idTask: string
     status: string
     name: string
-    dueDate:string
-    type:string
+    dueDate: string
+    type: string
     isCreate: boolean
 }
 
@@ -47,7 +47,7 @@ export interface UpdateTodo {
     status: string
     isUpdate: boolean
 }
-   const randomId = () => {
+const randomId = () => {
     return Math.random().toString(36).slice(2)
 }
 const globalInitStatus = [
@@ -60,69 +60,19 @@ const globalInitStatus = [
         name: "Medium Priority"
     }
 ]
-const globalInitTodo = [
-    {
-        id: "1",
-        idTask: "1",
-        dueDate: "2024-01-25",
-        status: "In Progress",
-        name: "Học Nextjs với F8",
-    },
-    {
-        id: "etr",
-        idTask: "2",
-        dueDate: "2024-01-25",
-        status: "In Progress",
-        name: "Học reactjs với F8",
-    },
-    {
-        id: "222",
-        idTask: "2",
-        dueDate: "2024-01-25",
-        status: "In Progress",
-        name: "Học php với F8",
-    },
-    {
-        id: "e444",
-        idTask: "1",
-        dueDate: "2024-01-25",
-        status: "Complete",
-        name: "Học nodejs với F8",
-    }
-]
+
 const TestPage = () => {
 
+    const fetchTodo = async () => {
+        const data = await fetch('/api/todo', {
+            method: "GET"
+        })
+        const body = await data.json()
+        setTodo(body)            
+    }
 
-    const [todo, setTodo] = useState<IToDo[]>([
-        {
-            id: "1",
-            idTask: "1",
-            dueDate: "2024-01-25",
-            status: "In Progress",
-            name: "Học Nextjs với F8",
-        },
-        {
-            id: "etr",
-            idTask: "2",
-            dueDate: "2024-01-25",
-            status: "In Progress",
-            name: "Học reactjs với F8",
-        },
-        {
-            id: "222",
-            idTask: "2",
-            dueDate: "2024-01-25",
-            status: "In Progress",
-            name: "Học php với F8",
-        },
-        {
-            id: "e444",
-            idTask: "1",
-            dueDate: "2024-01-25",
-            status: "Complete", 
-            name: "Học nodejs với F8",
-        }
-    ])
+
+    const [todo, setTodo] = useState<IToDo[]>([])
     const [status, setStatus] = useState<Status[]>([
         {
             id: "1",
@@ -138,9 +88,9 @@ const TestPage = () => {
         id: randomId(),
         idTask: "",
         name: "",
-        dueDate:"",
+        dueDate: "",
         status: "",
-        type:"",
+        type: "",
         isCreate: false,
     }
 
@@ -155,17 +105,22 @@ const TestPage = () => {
     const [newStatus, setNewStatus] = useState<NewStatus>(initStatus)
 
     const [updateTodos, setUpdateTodos] = useState<UpdateTodo>({ id: "", name: "", status: "", dueDate: "", isUpdate: false })
-    useEffect(() => {
-        const localTodo = localStorage.getItem('localTodo')
-        setTodo(localTodo ? JSON.parse(localTodo) : globalInitTodo)
-    }, [])
+    // useEffect(() => {
+    //     const localTodo = localStorage.getItem('localTodo')
+    //     setTodo(localTodo ? JSON.parse(localTodo) : globalInitTodo)
+    // }, [])
+
+    // useEffect(() => {
+    //     const localStatus = localStorage.getItem('localStatus')
+
+
+    //     setStatus(localStatus ? JSON.parse(localStatus) : globalInitStatus)
+
+    // }, [])
+
 
     useEffect(() => {
-        const localStatus = localStorage.getItem('localStatus')
-
-
-        setStatus(localStatus ? JSON.parse(localStatus) : globalInitStatus)
-
+        fetchTodo()
     }, [])
 
     const group = todo.reduce((prev: ITaskGroup[], next) => {
@@ -181,11 +136,11 @@ const TestPage = () => {
                     children: [next]
                 })
             }
-            else{
+            else {
                 prev.push(
                     {
-                        id:"3",
-                        children:[next] 
+                        id: "3",
+                        children: [next]
                     }
                 )
             }
@@ -211,12 +166,12 @@ const TestPage = () => {
                     <div key={groupItem.id} className="">
                         <div className='flex '>
                             <h3 className='font-bold text-lg mr-2'>{groupItem.name}</h3>
-                          {groupItem.id==="1" &&   <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
+                            {groupItem.id === "1" && <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
                                 onClick={() => setNewTodo((prev) => {
                                     return {
                                         ...prev,
                                         idTask: groupItem.id,
-                                        type:"2",
+                                        type: "2",
                                         isCreate: true
                                     }
                                 })}>
@@ -225,12 +180,12 @@ const TestPage = () => {
                                     />
                                 </svg>
                             </button>}
-                            {groupItem.id==="2" &&   <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
+                            {groupItem.id === "2" && <button className=' w-6 h-6 flex justify-center items-center  border-[3px] rounded-full border-stone-500 '
                                 onClick={() => setNewTodo((prev) => {
                                     return {
                                         ...prev,
                                         idTask: groupItem.id,
-                                        type:"2",
+                                        type: "2",
                                         isCreate: true
                                     }
                                 })}>
@@ -268,14 +223,14 @@ const TestPage = () => {
                     onClick={() => setNewTodo((prev) => {
                         return {
                             ...prev,
-                            type:"1",
+                            type: "1",
                             isCreate: true
                         }
                     })}>Add Task</button>
             </div>
             <AddTodo
                 setTodo={setTodo}
-                newTodo={newTodo}   
+                newTodo={newTodo}
                 setNewTodo={setNewTodo}
             />
         </div>
