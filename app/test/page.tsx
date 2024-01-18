@@ -68,7 +68,7 @@ const TestPage = () => {
             method: "GET"
         })
         const body = await data.json()
-        setTodo(body)            
+        setTodo(body)
     }
 
 
@@ -89,7 +89,7 @@ const TestPage = () => {
         idTask: "",
         name: "",
         dueDate: "",
-        status: "",
+        status: "In Progress",
         type: "",
         isCreate: false,
     }
@@ -154,12 +154,13 @@ const TestPage = () => {
 
     return (
         <div className=" font- text-shadow- rounded-3xl shadow-2xl bg-white p-8 m-10">
-            <div className=' w-full  grid grid-cols-5 text-gray-400'>
+            <div className=' w-full  grid grid-cols-6 text-gray-400'>
 
-                <div className='font-bold  border-r-2 border-r-slate-400 col-span-2 '>Tasks</div>
+                <div className='font-bold  border-r-2 border-r-slate-400 col-span-2  '>Tasks</div>
                 <div className='font-bold text-center border-r-2 border-r-slate-400'>Day</div>
                 <div className='font-bold text-center border-r-2 border-r-slate-400'>Status</div>
                 <div className='font-bold text-center  border-r-2 border-r-slate-400'>Update</div>
+                <div className='font-bold text-center  border-r-2 border-r-slate-400 col-span-1 '>Delete</div>
             </div>
             <div>
                 {group.map((groupItem) => (
@@ -199,7 +200,9 @@ const TestPage = () => {
 
                         <React.Fragment key={groupItem.id}>
                             {groupItem.children.map((item) => (
-                                <ToDoItem todo={item} key={item.id}
+                                <ToDoItem
+                                    allTodo={todo}
+                                    todo={item} key={item.id}
                                     setTodo={setTodo}
                                     setUpdateTodos={setUpdateTodos}
                                 />

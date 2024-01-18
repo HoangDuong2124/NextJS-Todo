@@ -8,7 +8,6 @@ interface IEditTodo {
 const EditTodo = ({ todo, setTodo }: IEditTodo) => {
 
     const fetchUpdate = async (data:UpdateTodo)=>{
-         console.log("Em tên là:",JSON.stringify(data))
         const res = await fetch(`/api/todo/${update.id}`,{
             method: "PUT",
             headers:{
@@ -31,7 +30,7 @@ const EditTodo = ({ todo, setTodo }: IEditTodo) => {
     }
     return (
         <>
-        {todo.isUpdate ===true&& <div className='w-full  grid grid-cols-5 border-b-2 '>
+        {todo.isUpdate ===true&& <div className='w-full  grid grid-cols-6 border-b-2 '>
             <div className=' flex p-3 col-span-2'>
                 <input  value={update.name}
                  onChange={e => setUpdate((prev) => {
