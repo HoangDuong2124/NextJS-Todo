@@ -2,17 +2,16 @@ import React from 'react'
 import { IToDo } from './page'
 import { UpdateTodo } from './page'
 import EditTodo from './EditTodo'
-interface IProps {
+interface ITodoItem {
     allTodo: IToDo[]
     todo: IToDo
     setTodo: React.Dispatch<React.SetStateAction<IToDo[]>>
     setUpdateTodos: React.Dispatch<React.SetStateAction<UpdateTodo>>
 }
 
-const ToDoItem = ({ allTodo, todo, setTodo, setUpdateTodos }: IProps) => {
+const ToDoItem = ({ allTodo, todo, setTodo, setUpdateTodos }: ITodoItem) => {
 
     const fetchUpdate = async (data: {}) => {
-        console.log(data)
         const res = await fetch(`/api/todo/${todo.id}`, {
             method: "PUT",
             headers: {
@@ -36,7 +35,7 @@ const ToDoItem = ({ allTodo, todo, setTodo, setUpdateTodos }: IProps) => {
 
     const updateCheckTodo = () => {
         setTodo((prev) => {
-            const find = prev.map((items) => {
+            const dataUpdate = prev.map((items) => {
 
                 if (items.id === todo.id) {
                     if (todo.isCheck === true) return { ...items, isCheck: false }
@@ -47,7 +46,7 @@ const ToDoItem = ({ allTodo, todo, setTodo, setUpdateTodos }: IProps) => {
                 return items
             }
             )
-            return find
+            return dataUpdate
         })
         const data = {
             id:todo.id,
@@ -57,18 +56,17 @@ const ToDoItem = ({ allTodo, todo, setTodo, setUpdateTodos }: IProps) => {
     }
     const updateTodo = () => {
         setTodo((prev) => {
-            const a = prev.map((item) =>
+            const data = prev.map((item) =>
                 item.id === todo.id ? { ...item, isUpdate: true } : item
             )
-            return a
+            return data
         })
     }
     const deleteTodo = () => {
-        console.log(todo.id)
         if (confirm("Are you sure delete?") == true) {
             setTodo((prev) => {
-                const dl = prev.filter((item) => item.id !== todo.id)
-                return dl
+                const dataDelete = prev.filter((item) => item.id !== todo.id)
+                return dataDelete
             })
             fetchDelete(todo.id)
         }

@@ -13,7 +13,7 @@ export interface IToDo {
     isUpdate?: boolean
 }
 
-export interface Status {
+export interface ITask {
     id: string
     name: string
 }
@@ -35,11 +35,7 @@ export interface NewTodo {
     isCreate: boolean
 }
 
-export interface NewStatus {
-    id: string
-    name: string
-    isCreate: boolean
-}
+
 export interface UpdateTodo {
     id: string
     name: string
@@ -61,7 +57,7 @@ const globalInitStatus = [
     }
 ]
 
-const TestPage = () => {
+const TodoPage = () => {
 
     const fetchTodo = async () => {
         const data = await fetch('/api/todo', {
@@ -73,7 +69,7 @@ const TestPage = () => {
 
 
     const [todo, setTodo] = useState<IToDo[]>([])
-    const [status, setStatus] = useState<Status[]>([
+    const [task, setTask] = useState<ITask[]>([
         {
             id: "1",
             name: "High Priority"
@@ -84,7 +80,7 @@ const TestPage = () => {
         }
     ])
 
-    const init = {
+    const initTodo = {
         id: randomId(),
         idTask: "",
         name: "",
@@ -94,15 +90,7 @@ const TestPage = () => {
         isCreate: false,
     }
 
-    const initStatus = {
-        id: randomId(),
-        name: "",
-        isCreate: false,
-    }
-
-    const [newTodo, setNewTodo] = useState<NewTodo>(init)
-
-    const [newStatus, setNewStatus] = useState<NewStatus>(initStatus)
+    const [newTodo, setNewTodo] = useState<NewTodo>(initTodo)
 
     const [updateTodos, setUpdateTodos] = useState<UpdateTodo>({ id: "", name: "", status: "", dueDate: "", isUpdate: false })
 
@@ -111,16 +99,16 @@ const TestPage = () => {
         fetchTodo()
     }, [])
 
-    const group = todo.reduce((prev: ITaskGroup[], next) => {
+    const iTaskGroup = todo.reduce((prev: ITaskGroup[], next) => {
         const exits = prev.find((item) => item.id === next.idTask)
         if (exits) {
             exits.children.push(next)
         } else {
-            const statuses = status.find((item) => item.id === next.idTask)
-            if (statuses) {
+            const tasks = task.find((item) => item.id === next.idTask)
+            if (tasks) {
                 prev.push({
-                    id: statuses!.id,
-                    name: statuses!.name,
+                    id: tasks!.id,
+                    name: tasks!.name,
                     children: [next]
                 })
             }
@@ -151,7 +139,7 @@ const TestPage = () => {
                 <div className='font-bold text-center  border-r-2 border-r-slate-400 col-span-1 '>Delete</div>
             </div>
             <div>
-                {group.map((groupItem) => (
+                {iTaskGroup.map((groupItem) => (
                     <div key={groupItem.id} className="">
                         <div className='flex '>
                             <h3 className='font-bold text-lg mr-2'>{groupItem.name}</h3>
@@ -229,6 +217,6 @@ const TestPage = () => {
     )
 }
 
-export default TestPage
+export default TodoPage
 
 

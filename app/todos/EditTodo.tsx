@@ -21,10 +21,10 @@ const EditTodo = ({ todo, setTodo }: IEditTodo) => {
     const [update, setUpdate] = useState<UpdateTodo>({ id:todo.id, name:todo.name, status:todo.status, dueDate:todo.dueDate, isUpdate: false })
     const saveUpdate = () => {
         setTodo(prev => {
-            const save = prev.map((item) =>
+            const dataUpdate = prev.map((item) =>
                 item.id === todo.id ? { ...item, name: update.name, status: update.status, dueDate: update.dueDate, isUpdate: false } : item
             )   
-            return save
+            return dataUpdate
         })
         fetchUpdate(update)
     }

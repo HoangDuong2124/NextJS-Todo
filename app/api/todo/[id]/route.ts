@@ -4,7 +4,6 @@ export async function GET(req:Request ,{params}:{
     params:{id:string}
 }) {
     try {
-        console.log(params.id)
         const getByID = await prisma.todo.findUnique({
             where:{
                 id:+params.id
@@ -12,7 +11,6 @@ export async function GET(req:Request ,{params}:{
         })
         return NextResponse.json(getByID)
     } catch (error) {
-        console.log(error)
         return NextResponse.json({message:"Failed"},{status:400})
     }
     
@@ -51,9 +49,6 @@ export async function DELETE(req: Request) {
         return NextResponse.json(deleteTodo)
     }
     catch (e) {
-
-        console.log(e)
-
         return NextResponse.json({ message: "failed" }, {
             status: 400
         })

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { IToDo } from './page'
 import { NewTodo } from './page'
-interface IAdd {
+interface IAddTodo {
     newTodo: NewTodo
     setTodo: React.Dispatch<React.SetStateAction<IToDo[]>>
     setNewTodo: React.Dispatch<React.SetStateAction<NewTodo>>
 }
 
-const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
+const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAddTodo) => {
 
     const fetchAdd = async (data: IToDo) => {
         const res = await fetch('/api/todo', {
@@ -35,7 +35,6 @@ const AddTodo = ({ newTodo, setNewTodo, setTodo }: IAdd) => {
     }
     const addNewTodo = async () => {
         try {
-           console.log(newTodo)
             setTodo(prev => {
                 const add = [...prev, newTodo]
                 return add
