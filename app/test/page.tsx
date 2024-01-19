@@ -105,18 +105,6 @@ const TestPage = () => {
     const [newStatus, setNewStatus] = useState<NewStatus>(initStatus)
 
     const [updateTodos, setUpdateTodos] = useState<UpdateTodo>({ id: "", name: "", status: "", dueDate: "", isUpdate: false })
-    // useEffect(() => {
-    //     const localTodo = localStorage.getItem('localTodo')
-    //     setTodo(localTodo ? JSON.parse(localTodo) : globalInitTodo)
-    // }, [])
-
-    // useEffect(() => {
-    //     const localStatus = localStorage.getItem('localStatus')
-
-
-    //     setStatus(localStatus ? JSON.parse(localStatus) : globalInitStatus)
-
-    // }, [])
 
 
     useEffect(() => {

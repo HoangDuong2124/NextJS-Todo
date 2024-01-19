@@ -1,27 +1,22 @@
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
-export async function GET(req: Request, { params }: {
-    params: { id: string }
-}
-) {
+export async function GET(req:Request ,{params}:{
+    params:{id:string}
+}) {
     try {
-
-
-        console.log(params)
+        console.log(params.id)
         const getByID = await prisma.todo.findUnique({
-            where: {
-                id: +params.id
-            },
+            where:{
+                id:+params.id
+            }
         })
         return NextResponse.json(getByID)
-    } catch (e) {
-        console.log(e)
-
-        return NextResponse.json({ message: "failed" }, {
-            status: 400
-        })
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({message:"Failed"},{status:400})
     }
-}
+    
+} 
 export async function PUT(req: Request) {
     try {
         const body = await req.json()
